@@ -1,4 +1,4 @@
-import { BrowserRouter, NavLink, Route, Routes } from "react-router-dom";
+import { BrowserRouter, NavLink, Route, Routes, Navigate } from "react-router-dom";
 import Customers from "./pages/Customers";
 import Projects from "./pages/Projects";
 import Schedule from "./pages/Schedule";
@@ -31,19 +31,22 @@ export default function App() {
     <BrowserRouter>
       <div style={{ paddingBottom: 80 }}>
         <Routes>
-          <Route path="/" element={<Customers />} />
+          {/* ⭐ 首頁直接導向輸出單 */}
+          <Route path="/" element={<Navigate to="/docs" replace />} />
+
+          <Route path="/docs" element={<DocsGenerator />} />
+          <Route path="/customers" element={<Customers />} />
           <Route path="/projects" element={<Projects />} />
           <Route path="/schedule" element={<Schedule />} />
           <Route path="/inventory" element={<Inventory />} />
-          <Route path="/docs" element={<DocsGenerator />} />
         </Routes>
 
         <nav style={navStyle}>
-          <NavLink to="/" style={linkStyle}>客戶</NavLink>
+          <NavLink to="/docs" style={linkStyle}>輸出單</NavLink>
+          <NavLink to="/customers" style={linkStyle}>客戶</NavLink>
           <NavLink to="/projects" style={linkStyle}>案件</NavLink>
           <NavLink to="/schedule" style={linkStyle}>排工</NavLink>
           <NavLink to="/inventory" style={linkStyle}>成本</NavLink>
-          <NavLink to="/docs" style={linkStyle}>輸出單</NavLink>
         </nav>
       </div>
     </BrowserRouter>

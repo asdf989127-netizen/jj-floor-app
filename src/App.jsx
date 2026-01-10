@@ -1,4 +1,4 @@
-import { BrowserRouter, NavLink, Route, Routes, Navigate } from "react-router-dom";
+import { HashRouter, NavLink, Route, Routes, Navigate } from "react-router-dom";
 import Customers from "./pages/Customers";
 import Projects from "./pages/Projects";
 import Schedule from "./pages/Schedule";
@@ -28,7 +28,7 @@ const linkStyle = ({ isActive }) => ({
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <div style={{ paddingBottom: 80 }}>
         <Routes>
           {/* ⭐ 首頁直接導向輸出單 */}
@@ -49,6 +49,6 @@ export default function App() {
           <NavLink to="/inventory" style={linkStyle}>成本</NavLink>
         </nav>
       </div>
-    </BrowserRouter>
+    </HashRouter>
   );
 }

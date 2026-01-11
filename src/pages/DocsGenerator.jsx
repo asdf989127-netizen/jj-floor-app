@@ -56,7 +56,7 @@ export default function DocsGenerator() {
     emergencyContact: "余崇耀0987359611", // ✅ 預設
     unloadMaterialPlace: "",
 
-    // ✅ 新增：其他配件或材料（有輸入才顯示在派工與叫料單）
+    // ✅ 其他配件或材料（有輸入才顯示在派工與叫料單）
     otherItems: "",
 
     // 施工資訊預設
@@ -176,12 +176,14 @@ ${cutDoorLine}
 
     const brandLine = brandList.length ? brandList.join("、") : "";
 
+    // ✅ 修改：每個材料後面自動加上（材料總坪數 xx.xx 坪）
     const materialLine = computedMaterials
       .map((m) => {
         const brand = (m.brand || "").trim();
         const model = (m.model || "").trim();
         const tag = [brand, model].filter(Boolean).join(" ");
-        return `${tag} * ${m.boxes}箱`;
+        if (!tag) return "";
+        return `${tag} * ${m.boxes}箱（材料總坪數 ${m.boxedTotalPing.toFixed(2)} 坪）`;
       })
       .filter(Boolean)
       .join("、");
@@ -260,7 +262,6 @@ ${accessoriesBlock}${otherLine}
                 onChange={(v) => setField("unloadMaterialPlace", v)}
                 placeholder="例如：B1卸貨區/管理室旁"
               />
-              {/* ✅ 新增欄位 */}
               <Field
                 label="其他配件或材料（有填才會出現在派工/叫料單）"
                 value={f.otherItems}

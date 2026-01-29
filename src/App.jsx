@@ -4,6 +4,7 @@ import Projects from "./pages/Projects";
 import Schedule from "./pages/Schedule";
 import Inventory from "./pages/Inventory";
 import DocsGenerator from "./pages/DocsGenerator";
+import QuoteCalc from "./pages/QuoteCalc";
 
 const navStyle = {
   position: "fixed",
@@ -12,7 +13,7 @@ const navStyle = {
   bottom: 0,
   height: 64,
   display: "grid",
-  gridTemplateColumns: "repeat(5, 1fr)",
+  gridTemplateColumns: "repeat(6, 1fr)",
   borderTop: "1px solid #e5e5e5",
   background: "white",
 };
@@ -31,18 +32,22 @@ export default function App() {
     <HashRouter>
       <div style={{ paddingBottom: 80 }}>
         <Routes>
-          {/* ⭐ 首頁直接導向輸出單 */}
           <Route path="/" element={<Navigate to="/docs" replace />} />
 
           <Route path="/docs" element={<DocsGenerator />} />
+          <Route path="/quote" element={<QuoteCalc />} />
+
           <Route path="/customers" element={<Customers />} />
           <Route path="/projects" element={<Projects />} />
           <Route path="/schedule" element={<Schedule />} />
           <Route path="/inventory" element={<Inventory />} />
+
+          <Route path="*" element={<Navigate to="/docs" replace />} />
         </Routes>
 
         <nav style={navStyle}>
           <NavLink to="/docs" style={linkStyle}>輸出單</NavLink>
+          <NavLink to="/quote" style={linkStyle}>估價</NavLink>
           <NavLink to="/customers" style={linkStyle}>客戶</NavLink>
           <NavLink to="/projects" style={linkStyle}>案件</NavLink>
           <NavLink to="/schedule" style={linkStyle}>排工</NavLink>
